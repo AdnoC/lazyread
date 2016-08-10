@@ -396,10 +396,13 @@ char qfilename[BUFMAX]; /* quoted filename */
     }
 
     if (!(fp_write = fopen(lfile.lazy_file, "r"))) 
-        my_perror("fopen()");
-    if (file_size(fp_write) == 0)
         empty = 1;
-    fclose(fp_write);
+    else {
+      if (file_size(fp_write) == 0)
+          empty = 1;
+      fclose(fp_write);
+
+    }
 
     if (empty) {
     /* lesspipe didn't have any output, make the file ourselves */
