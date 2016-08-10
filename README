@@ -1,0 +1,153 @@
+Lazyread 2.0 README by Ryan Kulla (Feb 2nd 2003)
+
+Description
+===========
+Lazyread auto-scrolls files or command output on your screen.
+
+You can choose between different kinds of scroll modes and there are many
+command line and dynamic options such as changing the scroll speed, pausing,
+colors, search strings, case, file info, and more. It is an auto-scroller, 
+pager and e-book reader all in one!
+
+You can supply it many file types for viewing including text, html, pdf,
+gzip, tar, zip, ar, bzip2, MS-Word, nroff (man pages), executable, directory, 
+.deb, .so, .rpm, piped output from other programs and more.
+
+I originally wrote lazyread because I wanted a way to read long files while
+I sat back in my chair and read without needing to touch my keyboard to 
+scroll down the pages as I read them. I've since added many features.
+
+Here are some examples of uses for lazyread:
+
+- You want to take notes of what you're reading without having to put down
+  your pencil and paper to scroll down the file.
+
+- You want to be able to eat while you're reading without getting food all
+  over your keyboard.
+
+- You want to read while laying or sitting too far away from you keyboard to
+  reach it.
+
+- You want to be able to read a file while doing some exercises in front
+  of your computer.
+
+- You want to practice speed reading. Just set the program at a fast
+  speed and see if you can keep up!
+
+- A screen saver..
+
+- You could even use it as a fitness tool by typing random commands in a
+  text file, such as 'right punch', 'left front kick', 'right side kick'
+  etc. Then run the file through lazyread and everytime you see a command,
+  execute it. Make the scroll speed faster and/or add more commands to
+  make your training harder!
+
+[Insert your own ideas here :)]
+
+
+Using lazyread
+--------------
+[The filename must come first on the command-line if you have other
+options, unless you use the -f flag. For example:
+    Correct: lazyread file.txt -options
+    Incorrect: lazyread -options file.txt
+    Correct: lazyread -options -f file.txt]
+
+[IMOPRTANT!]:
+lazyread comes with a script called "lesspipe.sh" thats used for reading
+compressed files. You need to place this file in your path and make sure 
+your environment variable $LESSOPEN points to it. Some systems come with 
+lesspipe.sh already installed so check to see if your version is up to date.
+
+Say you want to view a log file and highlight any lines containing 
+the string 'foo'. Just type:
+
+    lazyread log.txt -w foo
+
+Or maybe you want to scroll a file very slowly and in all uppercase letters:
+
+    lazyread /stories/moby_dick.pdf -s 5000 -u
+
+You can even scroll the output of other programs by piping lazyread.
+To do this you need to pass the name of the current tty you're running
+lazyread from. To get the name of the tty just type the command tty(1).
+It reports the full path to the current ttyname such as '/dev/tty0'.
+
+    dmesg | lazyread -t /dev/tty0
+
+There's an alternate mode (and more modes coming soon) in lazyread that lets 
+you scroll letter by letter instead of line by line. Just use the -m flag:
+
+   lazyread file.txt -m 
+
+When you're viewing a non text file like a pdf or an html file lazyread
+renders it so its viewable and if you hit 'e' to open the file in your
+external editor you will be editing the actual source of the file.
+
+For instance: 
+
+type "lazyread index.html" will render the html as you'd see it while
+viewing in a browser (a text based browser anyway) and typing 'e' while
+its running will open the real index.html in vi (or whatever editor you
+set) so you can edit tags etc..
+
+Lazyread supports color. Choose from red, bgred, blue, bgblue, green, 
+bggren, yellow, bgyellow, magenta, bgmagenta, bgwhite and bgblack. 
+Just supply "-c <color>" on the lazyread command line.
+
+Some of my favorite commands
+===========================
+Normal viewing:
+
+    lazyread file.html -c green -w word -b
+
+Character at a time viewing mode:
+
+    lazyread file.txt -m -c bgblue -s 100
+
+View URLs:
+
+    lynx -dump http://site.com/page.html > page.txt ; lazyread page.txt
+
+You get the idea.  Adjust lazyread anyway you like.
+
+Type: 
+
+    lazyread -h
+
+to get a full list of commands.
+
+Dynamic Options
+---------------
+While lazyread is running you can use the following option keys:
+
+'q' to quit
+'p' to pause
+'spacebar' to scroll superfast (hit again to slow back down)
+'c' to clear the current screen
+'n' to turn off the status bar
+'v' to turn the status bar back on
+'f' to speed scrolling up in 25 percent increments
+'s' to slow scrolling speed down in 25 percent increments
+'o' to go back to the original scroll speed
+'a' to toggle Auto-pausing on/off
+'e' to open the file you're scrolling in an external editor. (Uses the 
+environment variables $VISUAL then $EDITOR or /bin/vi if none are set)
+'i' to view detailed file/program/etc information
+
+
+Text Wrapping 
+-------------
+Lazyread uses the fmt(1) command to word wrap files. You need the fmt
+command installed for lazy read because this is turned on by default.
+
+BUGS
+----
+You can report bugs to the author: 
+
+Ryan Kulla 
+ambiod@sbcglobal.net
+gt3 on irc.openprojects.net
+
+Author's Home Page: http://www30.brinkster.com/gt3world/myworld.html
+Lazyread's Home page: http://seekrut.com/rk/lazyread.html
